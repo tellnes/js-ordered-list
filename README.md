@@ -21,14 +21,14 @@ list.forEach(function(value) {
 
 Outputs:
 
-  Hello
-  World
+    Hello
+    World
 
 
 ## Install
 
 
-  npm install ordered-list
+    npm install ordered-list
 
 
 
