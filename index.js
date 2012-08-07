@@ -45,7 +45,7 @@ List.prototype.rename = function(okey, nkey) {
   , 'reduceRight'
   ].forEach(function(name) {
     List.prototype[name] = function() {
-      return this.toArray()[name].apply(this._arr, arguments)
+      return Array.prototype[name].apply(this.toArray(), arguments)
     }
   })
 
