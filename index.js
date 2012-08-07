@@ -24,13 +24,29 @@ List.prototype.get = function(key) {
 List.prototype.remove = function(key) {
   var info = this._obj[key]
   delete this._obj[key]
+
+  if (info.aliases) info.aliases.forEach(function(alias) {
+    delete this._obj[alias]
+  }, this)
+
   this._arr.splice(info.index, 1)
   return info.value
 }
 
-List.prototype.rename = function(okey, nkey) {
+List.prototype.rename = function(okey, nkey, alias) {
   this._obj[nkey] = this._obj[okey]
   delete this._obj[okey]
+  if (alias) this.alias(okey, nkey)
+}
+
+List.prototype.alias = function(key, alias) {
+  var info = this._obj[key]
+  if (!info.aliases) info.aliases = []
+
+  alias = String(alias)
+
+  info.aliases.push(alias)
+  this._obj[alias] = info
 }
 
 ; [ 'join'
