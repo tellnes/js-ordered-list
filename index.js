@@ -143,3 +143,37 @@ List.prototype.previous = function(key) {
 
   return info.value
 }
+
+
+
+function getSortFunction(key, options) {
+  options = options || {}
+
+  if (options.reverse) {
+    if (options.numeric) fn = function(a, b) {
+      return b[key] - a[key]
+    }
+    else fn = function(a, b) {
+      return b[key] > a[key] ? 1 : b[key] < a[key] ? -1 : 0
+    }
+
+  } else {
+    if (options.numeric) fn = function(a, b) {
+      return a[key] - b[key]
+    }
+    else fn = function(a, b) {
+      return a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0
+    }
+  }
+
+  return fn
+}
+
+
+List.prototype.sortBy = function(key, options) {
+  return this.sort(getSortFunction(key, options))
+}
+
+List.prototype.sortByKey = function(options) {
+  return this._arr.sort(getSortFunction('key', options))
+}
