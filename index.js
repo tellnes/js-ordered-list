@@ -81,10 +81,11 @@ Object.defineProperty(List.prototype, 'length', { get: function() { return this.
 
 
 List.prototype.first = function() {
-  return this._arr[0].value
+  if (this._arr[0]) return this._arr[0].value
 }
 List.prototype.last = function() {
-  return this._arr[this._arr.length-1].value
+  var info = this._arr[this._arr.length-1]
+  if (info) return info.value
 }
 
 ;['pop', 'shift'].forEach(function(name) {
