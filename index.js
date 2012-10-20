@@ -91,6 +91,7 @@ List.prototype.last = function() {
 ;['pop', 'shift'].forEach(function(name) {
   List.prototype[name] = function() {
     var info = this._arr[name]()
+    if (!info) return
     delete this._obj[info.key]
     return info.value
   }
