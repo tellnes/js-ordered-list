@@ -39,6 +39,12 @@ List.prototype.rename = function(okey, nkey, alias) {
   if (alias) this.alias(okey, nkey)
 }
 
+List.prototype.move = function(key, pos) {
+  var info = this._obj[key]
+  this._arr.splice(info.index, 1)
+  this._arr.splice(pos, 0, info)
+}
+
 List.prototype.alias = function(key, alias) {
   var info = this._obj[key]
   if (!info.aliases) info.aliases = []
